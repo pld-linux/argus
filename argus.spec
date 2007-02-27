@@ -1,6 +1,5 @@
 # TODO
 # - configure without options not working
-# - useradd -o should not be allowed! -M is nonstandard, -r has no point if -u is used (also kill other unneccessary opts)
 #
 # Conditional build:
 %bcond_without	tcp_wrappers	# build with tcp_wrappers support
@@ -9,7 +8,7 @@
 %define		_ver_major	3.0
 %define		_ver_minor	0
 %define		_rc		rc.40
-%define		_rel	0.2
+%define		_rel	0.3
 Summary:	Real time network flow monitor
 Summary(pl.UTF-8):	Monitor obciążenia sieci czasu rzeczywistego
 Name:		argus
@@ -77,8 +76,8 @@ touch $RPM_BUILD_ROOT%{_var}/log/%{name}/%{name}.log
 rm -rf $RPM_BUILD_ROOT
 
 %pre
-%groupadd -g 214 -r argus
-%useradd -M -o -r -u 214 -d /usr/share/empty -s /bin/sh -g argus -c "argus daemon" argus
+%groupadd -g 214 argus
+%useradd -u 214 -d /usr/share/empty -s /bin/sh -g argus -c "argus daemon" argus
 
 %post
 /sbin/chkconfig --add %{name}
