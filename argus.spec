@@ -23,12 +23,13 @@ Source1:	%{name}.conf
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 URL:		http://www.qosient.com/argus/
-BuildRequires:	rpmbuild(macros) >= 1.228
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 BuildRequires:	libpcap-devel
 BuildRequires:	bison
 %{?with_tcp_wrappers:BuildRequires:	libwrap-devel}
 %{?with_tcp_wrappers:BuildRequires:	cyrus-sasl-devel}
+Requires:	rc-scripts
 Provides:	group(argus)
 Provides:	user(argus)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
