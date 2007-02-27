@@ -1,5 +1,4 @@
 # TODO
-# - logrotate (or argusrotate)
 # - configure without options not working
 #
 # Conditional build:
@@ -22,6 +21,7 @@ Source0:	ftp://qosient.com/dev/argus-%{_ver_major}/%{name}-%{version}.%{_rc}.tar
 Source1:	%{name}.conf
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
+Source4:	%{name}.logrotate
 URL:		http://www.qosient.com/argus/
 BuildRequires:	bison
 %{?with_tcp_wrappers:BuildRequires:	cyrus-sasl-devel}
@@ -51,12 +51,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
-install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
+install -d $RPM_BUILD_ROOT/etc/{logrotate.d,rc.d/init.d,sysconfig}
 install -d $RPM_BUILD_ROOT%{_var}/log/%{name}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/%{name}.conf
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/%{name}
+install %{SOURCE4} $RPM_BUILD_ROOT/etc/logrotate.d/%{name}
 
 touch $RPM_BUILD_ROOT%{_var}/log/%{name}/%{name}.log
 
@@ -89,6 +90,7 @@ fi
 %dir %{_sysconfdir}/%{name}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
+%config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/%{name}
 %dir %{_var}/log/%{name}
 %attr(640,argus,root,) %ghost %{_var}/log/%{name}/%{name}.log
 %{_mandir}/man5/argus.conf.5*

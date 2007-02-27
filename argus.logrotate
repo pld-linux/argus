@@ -1,0 +1,10 @@
+/var/log/argus/*log {
+	olddir /var/log/archiv/argus
+	weekly
+	rotate 4
+	compress
+	create 660 root argus
+	postrotate
+		/sbin/service argus restart > /dev/null
+	endscript
+}
