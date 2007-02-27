@@ -8,7 +8,7 @@
 %define		_ver_major	3.0
 %define		_ver_minor	0
 %define		_rc		rc.40
-%define		_rel	0.3
+%define		_rel	0.4
 Summary:	Real time network flow monitor
 Summary(pl.UTF-8):	Monitor obciążenia sieci czasu rzeczywistego
 Name:		argus
@@ -24,7 +24,7 @@ Source3:	%{name}.sysconfig
 Source4:	%{name}.logrotate
 URL:		http://www.qosient.com/argus/
 BuildRequires:	bison
-%{?with_tcp_wrappers:BuildRequires:	cyrus-sasl-devel}
+%{?with_sasl:BuildRequires:	cyrus-sasl-devel}
 BuildRequires:	libpcap-devel
 %{?with_tcp_wrappers:BuildRequires:	libwrap-devel}
 BuildRequires:	rpmbuild(macros) >= 1.268
