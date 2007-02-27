@@ -7,28 +7,28 @@
 %bcond_without	tcp_wrappers	# build with tcp_wrappers support
 %bcond_without	sasl		# build with sasl support
 #
-Summary:	Real time network flow monitor
-Summary(pl.UTF-8):	Monitor obciążenia sieci czasu rzeczywistego
-Name:		argus
 %define		_ver_major	3.0
 %define		_ver_minor	.0
 %define		_rc		.rc.40
+Summary:	Real time network flow monitor
+Summary(pl.UTF-8):	Monitor obciążenia sieci czasu rzeczywistego
+Name:		argus
 Version:	%{_ver_major}%{_ver_minor}%{_rc}
 Release:	0.1
 License:	GPL v2
 Group:		Applications/Networking
-Source0:	ftp://qosient.com/dev/%{name}-%{_ver_major}/%{name}-%{version}.tar.gz
+Source0:	ftp://qosient.com/dev/argus-%{_ver_major}/%{name}-%{version}.tar.gz
 # Source0-md5:	49047be6450c6255cceb3fb9bfe3caed
 Source1:	%{name}.conf
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 URL:		http://www.qosient.com/argus/
+BuildRequires:	bison
+%{?with_tcp_wrappers:BuildRequires:	cyrus-sasl-devel}
+BuildRequires:	libpcap-devel
+%{?with_tcp_wrappers:BuildRequires:	libwrap-devel}
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
-BuildRequires:	libpcap-devel
-BuildRequires:	bison
-%{?with_tcp_wrappers:BuildRequires:	libwrap-devel}
-%{?with_tcp_wrappers:BuildRequires:	cyrus-sasl-devel}
 Requires:	rc-scripts
 Provides:	group(argus)
 Provides:	user(argus)
@@ -86,10 +86,10 @@ fi
 %attr(755,root,root) %{_bindir}/argusbug
 %attr(755,root,root) %{_sbindir}/argus
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
-%dir /etc/%{name}
-%config(noreplace) %verify(not md5 mtime size) /etc/%{name}/%{name}.conf
+%dir %{_sysconfdir}/%{name}
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
 %dir %{_var}/log/%{name}
 %attr(640,argus,root,) %ghost %{_var}/log/%{name}/%{name}.log
-%{_mandir}/man5/argus.conf.5.gz
-%{_mandir}/man8/argus.8.gz
+%{_mandir}/man5/argus.conf.5*
+%{_mandir}/man8/argus.8*
