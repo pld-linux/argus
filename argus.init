@@ -1,0 +1,66 @@
+#!/bin/sh
+# Startup script for argus
+#
+# chkconfig: 2345 97 01
+# description: Run argus
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Get service config
+if [ -f /etc/sysconfig/argus ]; then
+        . /etc/sysconfig/argus
+else
+	nls "Error: %s not found" /etc/sysconfig/argus
+	nls "argus daemon can't be run."
+        exit 1
+fi
+
+case "$1" in
+    start)
+	    if [ ! -f /var/lock/subsys/argus ]; then
+		msg_starting "argus"
+		daemon --user argus argus -d -w /var/log/argus/argus.log
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/argus
+	    else
+		msg_already_running "argus"
+	    fi
+	    ;;
+
+    stop)
+	    if [ -f /var/lock/subsys/argus ]; then
+		msg_stopping "argus"
+		killproc argus
+		rm -f /var/lock/subsys/argus
+	    fi
+	    ;;
+
+    restart)
+	    $0 stop
+	    $0 start
+	    exit $?
+	    ;;
+
+    reload|force-reload)
+	    if [ -f /var/lock/subsys/argus ]; then
+		msg_reloading "argus"
+		killproc argus -HUP
+		RETVAL=$?
+	    else
+		msg_not_running argus >&2
+		exit 7
+	    fi
+	    ;;
+
+    status)
+	    status argus
+    ;;
+
+    *)
+    echo $"Usage: $0 {start|stop|reload|force-reload|status}"
+    exit 1
+
+esac
+
+exit 0

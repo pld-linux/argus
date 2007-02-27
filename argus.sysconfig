@@ -1,0 +1,5 @@
+# argus daemon startup configuration file
+
+# Try to define nice-level for running argus
+SERVICE_RUN_NICE_LEVEL="+0"
+
