@@ -1,6 +1,6 @@
 # TODO
 # - configure without options not working
-# - useradd -o should not be allowed! (also kill other unneccessary opts)
+# - useradd -o should not be allowed! -M is nonstandard (also kill other unneccessary opts)
 #
 # Conditional build:
 %bcond_without	tcp_wrappers	# build with tcp_wrappers support
