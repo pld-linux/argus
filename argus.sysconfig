@@ -3,3 +3,5 @@
 # Try to define nice-level for running argus
 SERVICE_RUN_NICE_LEVEL="+0"
 
+# set argus log file
+LOG="-w /var/log/argus/argus.log"
