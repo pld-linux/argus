@@ -1,7 +1,7 @@
-#
 # TODO
 # - logrotate (or argusrotate)
 # - configure without options not working
+# - argus user homedir doesn't exist (is not packaged), or keep it /usr/share/empty
 #
 # Conditional build:
 %bcond_without	tcp_wrappers	# build with tcp_wrappers support
