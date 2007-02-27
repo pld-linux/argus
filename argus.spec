@@ -1,7 +1,6 @@
 # TODO
 # - logrotate (or argusrotate)
 # - configure without options not working
-# - argus user homedir doesn't exist (is not packaged), or keep it /usr/share/empty
 #
 # Conditional build:
 %bcond_without	tcp_wrappers	# build with tcp_wrappers support
@@ -69,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %pre
 %groupadd -g 214 -r argus
-%useradd -M -o -r -u 214 -d /home/services/argus -s /bin/sh -g argus -c "argus daemon" argus
+%useradd -M -o -r -u 214 -d /usr/share/empty -s /bin/sh -g argus -c "argus daemon" argus
 
 %post
 /sbin/chkconfig --add %{name}
