@@ -8,16 +8,17 @@
 %bcond_without	sasl		# build with sasl support
 #
 %define		_ver_major	3.0
-%define		_ver_minor	.0
-%define		_rc		.rc.40
+%define		_ver_minor	0
+%define		_rc		rc.40
+%define		_rel	0.2
 Summary:	Real time network flow monitor
 Summary(pl.UTF-8):	Monitor obciążenia sieci czasu rzeczywistego
 Name:		argus
-Version:	%{_ver_major}%{_ver_minor}%{_rc}
-Release:	0.1
+Version:	%{_ver_major}.%{_ver_minor}
+Release:	0.%{_rc}.%{_rel}
 License:	GPL v2
 Group:		Applications/Networking
-Source0:	ftp://qosient.com/dev/argus-%{_ver_major}/%{name}-%{version}.tar.gz
+Source0:	ftp://qosient.com/dev/argus-%{_ver_major}/%{name}-%{version}.%{_rc}.tar.gz
 # Source0-md5:	49047be6450c6255cceb3fb9bfe3caed
 Source1:	%{name}.conf
 Source2:	%{name}.init
@@ -39,7 +40,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description -l pl.UTF-8
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}.%{_rc}
 
 %build
 %configure \
