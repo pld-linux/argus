@@ -9,58 +9,70 @@
 
 # Get service config
 if [ -f /etc/sysconfig/argus ]; then
-        . /etc/sysconfig/argus
+	. /etc/sysconfig/argus
 else
 	nls "Error: %s not found" /etc/sysconfig/argus
 	nls "argus daemon can't be run."
-        exit 1
+	exit 1
 fi
 
-case "$1" in
-    start)
-	    if [ ! -f /var/lock/subsys/argus ]; then
-		msg_starting "argus"
+start() {
+	if [ ! -f /var/lock/subsys/argus ]; then
+		msg_starting argus
 		daemon --user argus argus -d -w /var/log/argus/argus.log
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/argus
-	    else
-		msg_already_running "argus"
-	    fi
-	    ;;
+	else
+		msg_already_running argus
+	fi
+}
 
-    stop)
-	    if [ -f /var/lock/subsys/argus ]; then
-		msg_stopping "argus"
+stop() {
+	if [ -f /var/lock/subsys/argus ]; then
+		msg_stopping argus
 		killproc argus
 		rm -f /var/lock/subsys/argus
-	    fi
-	    ;;
+	else
+		msg_not_running argus
+		RETVAL=7
+	fi
+}
 
-    restart)
-	    $0 stop
-	    $0 start
-	    exit $?
-	    ;;
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+  	start
+	;;
 
-    reload|force-reload)
-	    if [ -f /var/lock/subsys/argus ]; then
-		msg_reloading "argus"
+  stop)
+  	stop
+	;;
+
+  restart)
+	stop
+	start
+	;;
+
+  reload|force-reload)
+	if [ -f /var/lock/subsys/argus ]; then
+		msg_reloading argus
 		killproc argus -HUP
 		RETVAL=$?
-	    else
-		msg_not_running argus >&2
+	else
+		msg_not_running argus
 		exit 7
-	    fi
-	    ;;
+	fi
+	;;
 
-    status)
-	    status argus
-    ;;
+  status)
+	status argus
+	RETVAL=$?
+	;;
 
-    *)
-    echo $"Usage: $0 {start|stop|reload|force-reload|status}"
-    exit 1
-
+  *)
+	msg_usage "$0 {start|stop|reload|force-reload|status}"
+	exit 3
 esac
 
-exit 0
+exit $RETVAL
