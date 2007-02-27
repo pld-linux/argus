@@ -35,8 +35,19 @@ Provides:	user(argus)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
+Argus is a Real Time Flow Monitor designed to track
+and report on the status and performance of all network
+transactions seen in a data network traffic stream.
+It is similiar to Cisco NetFlow, however more powerful
+and with different data format.
 
 %description -l pl.UTF-8
+Argus jest monitorem sieci czasu rzeczywistego
+zaprojektowanym do śledzenia i raportowania stanu
+sieci oraz wszelkiego typu transakcji strumieni
+danych. Jest bardzo podobny do NetFlow z Cisco,
+jednak bardziej rozbudowany i posiada inny format
+danych.
 
 %prep
 %setup -q -n %{name}-%{version}.%{_rc}
