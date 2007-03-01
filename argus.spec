@@ -99,7 +99,7 @@ fi
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/%{name}
 %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/%{name}
-%dir %{_var}/log/%{name}
-%attr(640,argus,root,) %ghost %{_var}/log/%{name}/%{name}.log
+%attr(770,root,argus) %dir %{_var}/log/%{name}
+%attr(660,root,argus) %ghost %{_var}/log/%{name}/%{name}.log
 %{_mandir}/man5/argus.conf.5*
 %{_mandir}/man8/argus.8*
