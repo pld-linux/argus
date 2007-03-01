@@ -7,6 +7,9 @@
 # Source function library.
 . /etc/rc.d/init.d/functions
 
+# Get network config
+. /etc/sysconfig/network
+
 # Get service config
 [ -f /etc/sysconfig/argus ] && . /etc/sysconfig/argus
 
@@ -23,7 +26,7 @@ fi
 start() {
 	if [ ! -f /var/lock/subsys/argus ]; then
 		msg_starting argus
-		daemon --user argus argus -d "${LOG}"
+		daemon argus -d "${LOG}" "${USER}"
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/argus
 	else
