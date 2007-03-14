@@ -43,8 +43,9 @@ powerful and with different data format.
 %description -l pl.UTF-8
 Argus jest monitorem sieci czasu rzeczywistego zaprojektowanym do
 śledzenia i raportowania stanu sieci oraz wszelkiego typu transakcji
-strumieni danych. Jest bardzo podobny do NetFlow z Cisco, jednak
-bardziej rozbudowany i posiada inny format danych.
+sieciowych widzianych w strumieniu danych. Jest bardzo podobny do
+NetFlow z Cisco, jednak bardziej rozbudowany i posiada inny format
+danych.
 
 %prep
 %setup -q -n %{name}-%{version}.%{_rc}
