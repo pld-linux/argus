@@ -15,7 +15,7 @@ Release:	0.1
 License:	GPL v2
 Group:		Applications/Networking
 Source0:	ftp://qosient.com/dev/argus-%{_ver_major}/%{name}-%{version}.tar.gz
-# Source0-md5:	2cbe46b928010e504d6a7bfa5d13a072
+# Source0-md5:	c5f143fce0fa41239612fcc3619e6886
 Source1:	%{name}.conf
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
