@@ -7,17 +7,15 @@
 #
 %define		_ver_major	3.0
 %define		_ver_minor	0
-%define		_rc		rc.40
-%define		_rel	0.4
 Summary:	Real time network flow monitor
 Summary(pl.UTF-8):	Monitor obciążenia sieci czasu rzeczywistego
 Name:		argus
 Version:	%{_ver_major}.%{_ver_minor}
-Release:	0.%{_rc}.%{_rel}
+Release:	0.1
 License:	GPL v2
 Group:		Applications/Networking
-Source0:	ftp://qosient.com/dev/argus-%{_ver_major}/%{name}-%{version}.%{_rc}.tar.gz
-# Source0-md5:	49047be6450c6255cceb3fb9bfe3caed
+Source0:	ftp://qosient.com/dev/argus-%{_ver_major}/%{name}-%{version}.tar.gz
+# Source0-md5:	2cbe46b928010e504d6a7bfa5d13a072
 Source1:	%{name}.conf
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
@@ -48,7 +46,7 @@ NetFlow z Cisco, jednak bardziej rozbudowany i posiada inny format
 danych.
 
 %prep
-%setup -q -n %{name}-%{version}.%{_rc}
+%setup -q -n %{name}-%{version}
 
 %build
 %configure \
