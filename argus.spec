@@ -46,7 +46,7 @@ NetFlow z Cisco, jednak bardziej rozbudowany i posiada inny format
 danych.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %build
 %configure \
