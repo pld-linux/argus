@@ -21,8 +21,11 @@ Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 Source4:	%{name}.logrotate
 URL:		http://www.qosient.com/argus/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	bison
 %{?with_sasl:BuildRequires:	cyrus-sasl-devel}
+BuildRequires:	flex
 BuildRequires:	libpcap-devel
 %{?with_tcp_wrappers:BuildRequires:	libwrap-devel}
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -50,6 +53,12 @@ danych.
 %setup -q
 
 %build
+rm -r config/*
+cp -f %{_datadir}/automake/{config.sub,install-sh} config
+: > config/mkinstalldirs
+chmod +x config/mkinstalldirs
+%{__aclocal}
+%{__autoconf}
 %configure \
 	--with%{!?with_tcp_wrappers:out}-libwrap \
 	--with%{!?with_sasl:out}-sasl
