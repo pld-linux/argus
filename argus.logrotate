@@ -1,7 +1,5 @@
 /var/log/argus/*log {
 	olddir /var/log/archive/argus
-	weekly
-	rotate 4
 	compress
 	create 660 root argus
 	postrotate
