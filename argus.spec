@@ -33,7 +33,7 @@ Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
 Provides:	group(argus)
 Provides:	user(argus)
-Conflicts:	logrotate < 3.7-4
+Conflicts:	logrotate < 3.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description

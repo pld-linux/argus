@@ -1,4 +1,5 @@
 /var/log/argus/*log {
+	su root argus
 	olddir /var/log/archive/argus
 	compress
 	create 660 root argus
